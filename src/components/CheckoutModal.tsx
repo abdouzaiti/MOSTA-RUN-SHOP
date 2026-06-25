@@ -26,6 +26,7 @@ export default function CheckoutModal({
   const [step, setStep] = useState<CheckoutStep>('shipping');
   const [isProcessing, setIsProcessing] = useState(false);
   const [orderNumber, setOrderNumber] = useState('');
+  const [logoFailed, setLogoFailed] = useState(false);
 
   // Form states
   const [form, setForm] = useState<CheckoutDetails>({
@@ -197,11 +198,20 @@ export default function CheckoutModal({
           <div className="border-b border-neutral-100 bg-white">
             <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
               <div className="flex items-center gap-4">
-                <div className="flex flex-col text-left leading-[0.8] font-sans font-black tracking-tight text-[#0D5DF1] italic uppercase scale-y-[1.15] origin-left select-none">
-                  <span className="text-[12px]">Mosta</span>
-                  <span className="text-[12px]">Run</span>
-                  <span className="text-[12px]">Club</span>
-                </div>
+                {!logoFailed ? (
+                  <img
+                    src="/logo.png"
+                    alt="Mosta Run Club"
+                    onError={() => setLogoFailed(true)}
+                    className="h-9 w-auto object-contain select-none"
+                  />
+                ) : (
+                  <div className="flex flex-col text-left leading-[0.8] font-sans font-black tracking-tight text-[#0D5DF1] italic uppercase scale-y-[1.15] origin-left select-none">
+                    <span className="text-[12px]">Mosta</span>
+                    <span className="text-[12px]">Run</span>
+                    <span className="text-[12px]">Club</span>
+                  </div>
+                )}
                 <span className="font-sans text-xs font-bold uppercase text-neutral-400 tracking-wider">
                   | Checkout
                 </span>

@@ -158,7 +158,7 @@ export default function App() {
           {selectedProduct ? (
             // DETAILED PRODUCT SCREEN
             <motion.div
-              key={`product-details-${selectedProduct.id}`}
+              key="product-details-container"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}

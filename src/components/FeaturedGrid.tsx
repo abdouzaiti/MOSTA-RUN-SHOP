@@ -48,7 +48,7 @@ export default function FeaturedGrid({ products, onSelectProduct }: FeaturedGrid
           <div className="absolute inset-y-0 left-0 flex flex-col justify-between p-8 md:p-12 z-10 max-w-lg">
             <div className="space-y-3 mt-auto md:mt-0">
               <span className="inline-block text-xs font-bold tracking-widest text-[#0D5DF1] bg-blue-50/90 px-3 py-1 rounded-md font-sans uppercase">
-                Mosta Run Club
+                MRC SHOP
               </span>
               <h1 className="text-3xl md:text-5xl font-extrabold font-sans text-white tracking-tight leading-none">
                 Run Together.<br />Stronger Every Day.
