@@ -105,7 +105,7 @@ export default function ProductDetails({ product, onAddToCart, onBack, onSelectP
           <div className="relative aspect-square w-full rounded-2xl border border-neutral-100 bg-neutral-50 flex items-center justify-center overflow-hidden">
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-30" />
 
-            <div className="relative w-[280px] h-[280px] sm:w-[400px] sm:h-[400px] flex items-center justify-center z-10">
+            <div className="relative w-full h-full p-4 sm:p-8 md:p-12 flex items-center justify-center z-10">
               <AnimatePresence mode="wait">
                 <motion.img
                   key={`${selectedImageIndex}-${viewType}`}
