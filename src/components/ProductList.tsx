@@ -262,8 +262,8 @@ export default function ProductList({
                   className="flex flex-col cursor-pointer group"
                   id={`product-card-${product.id}`}
                 >
-                  {/* Visual Card Image container */}
-                  <div className="relative h-[220px] md:h-[280px] w-full overflow-hidden rounded-3xl border border-neutral-100 bg-neutral-50 flex items-center justify-center transition-all group-hover:border-neutral-200">
+                   {/* Visual Card Image container */}
+                  <div className="relative h-[220px] md:h-[280px] w-full overflow-hidden rounded-3xl border border-neutral-100 bg-neutral-50 flex items-center justify-center transition-all group-hover:border-neutral-200 p-6 md:p-10">
                     {/* Subtle layout grid mask */}
                     <div className="absolute inset-0 bg-[linear-gradient(to_right,#f5f5f5_1px,transparent_1px),linear-gradient(to_bottom,#f5f5f5_1px,transparent_1px)] bg-[size:3rem_3rem] opacity-30" />
 
@@ -275,7 +275,7 @@ export default function ProductList({
                     )}
 
                     {/* Centered Product Image */}
-                    <div className="relative w-[140px] h-[140px] md:w-[180px] md:h-[180px] flex items-center justify-center z-10">
+                    <div className="relative w-full h-full flex items-center justify-center z-10">
                       <img
                         src={product.images[0]}
                         alt={product.title}

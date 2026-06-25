@@ -102,10 +102,10 @@ export default function ProductDetails({ product, onAddToCart, onBack, onSelectP
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
         {/* Left Column: Image Viewer (lg:col-span-7) */}
         <div className="lg:col-span-7 flex flex-col gap-4">
-          <div className="relative aspect-square w-full rounded-2xl border border-neutral-100 bg-neutral-50 flex items-center justify-center overflow-hidden">
+          <div className="relative aspect-square w-full rounded-2xl border border-neutral-100 bg-neutral-50 flex items-center justify-center overflow-hidden p-6 sm:p-12 md:p-16">
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-30" />
-
-            <div className="relative w-full h-full p-4 sm:p-8 md:p-12 flex items-center justify-center z-10">
+ 
+            <div className="relative w-full h-full flex items-center justify-center z-10">
               <AnimatePresence mode="wait">
                 <motion.img
                   key={`${selectedImageIndex}-${viewType}`}

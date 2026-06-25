@@ -83,14 +83,14 @@ export default function FeaturedGrid({ products, onSelectProduct }: FeaturedGrid
           whileHover={{ y: -2 }}
           transition={{ duration: 0.3, ease: 'easeOut' }}
           onClick={() => onSelectProduct(rightTopItem)}
-          className="relative group md:col-span-2 md:row-span-1 h-[250px] md:h-full overflow-hidden rounded-3xl border border-neutral-100 bg-neutral-50 flex items-center justify-center cursor-pointer transition-all hover:border-neutral-200 shadow-sm"
+          className="relative group md:col-span-2 md:row-span-1 h-[250px] md:h-full overflow-hidden rounded-3xl border border-neutral-100 bg-neutral-50 flex items-center justify-center cursor-pointer transition-all hover:border-neutral-200 shadow-sm p-6 md:p-8"
           id={`featured-card-${rightTopItem.id}`}
         >
           {/* Light grid lines background */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#f5f5f5_1px,transparent_1px),linear-gradient(to_bottom,#f5f5f5_1px,transparent_1px)] bg-[size:3rem_3rem] opacity-40 z-0" />
 
           {/* Centered Product Image with Logo */}
-          <div className="relative w-[150px] h-[150px] md:w-[190px] md:h-[190px] flex items-center justify-center z-10">
+          <div className="relative w-full h-full flex items-center justify-center z-10">
             <img
               src={rightTopItem.images[0]}
               alt={rightTopItem.title}
@@ -126,14 +126,14 @@ export default function FeaturedGrid({ products, onSelectProduct }: FeaturedGrid
           whileHover={{ y: -2 }}
           transition={{ duration: 0.3, ease: 'easeOut' }}
           onClick={() => onSelectProduct(rightBottomItem)}
-          className="relative group md:col-span-2 md:row-span-1 h-[250px] md:h-full overflow-hidden rounded-3xl border border-neutral-100 bg-neutral-50 flex items-center justify-center cursor-pointer transition-all hover:border-neutral-200 shadow-sm"
+          className="relative group md:col-span-2 md:row-span-1 h-[250px] md:h-full overflow-hidden rounded-3xl border border-neutral-100 bg-neutral-50 flex items-center justify-center cursor-pointer transition-all hover:border-neutral-200 shadow-sm p-6 md:p-8"
           id={`featured-card-${rightBottomItem.id}`}
         >
           {/* Light grid lines background */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#f5f5f5_1px,transparent_1px),linear-gradient(to_bottom,#f5f5f5_1px,transparent_1px)] bg-[size:3rem_3rem] opacity-40 z-0" />
 
           {/* Centered Product Image with Logo */}
-          <div className="relative w-[150px] h-[150px] md:w-[190px] md:h-[190px] flex items-center justify-center z-10">
+          <div className="relative w-full h-full flex items-center justify-center z-10">
             <img
               src={rightBottomItem.images[0]}
               alt={rightBottomItem.title}
