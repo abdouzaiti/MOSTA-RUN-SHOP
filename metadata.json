@@ -1,0 +1,6 @@
+{
+  "name": "Mosta Run Club",
+  "description": "The official premium apparel storefront for Mosta Run Club. Shop high-performance t-shirts, polos, casquettes, and technical running gear.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
