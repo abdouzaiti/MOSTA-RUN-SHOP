@@ -10,6 +10,7 @@ import ProductList from './components/ProductList';
 import ProductDetails from './components/ProductDetails';
 import CartDrawer from './components/CartDrawer';
 import CheckoutModal from './components/CheckoutModal';
+import AdminDashboard from './components/AdminDashboard';
 import { Product, CartItem, SortKey, Color } from './types';
 import { PRODUCTS, CATEGORIES, SORT_OPTIONS } from './data';
 import { motion, AnimatePresence } from 'motion/react';
@@ -27,6 +28,15 @@ export default function App() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [isAdminView, setIsAdminView] = useState(false);
+
+  // Check for admin view on mount
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('admin') === 'true') {
+      setIsAdminView(true);
+    }
+  }, []);
 
   // Load cart from LocalStorage on mount
   useEffect(() => {
@@ -131,6 +141,10 @@ export default function App() {
     setSelectedProduct(product);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  if (isAdminView) {
+    return <AdminDashboard />;
+  }
 
   return (
     <div className="min-h-screen bg-white text-black font-sans flex flex-col antialiased selection:bg-black selection:text-white" id="app-root">
