@@ -129,7 +129,7 @@ export default function CheckoutModal({
   // Pricing calculations
   const subtotal = cartItems.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
   const tax = subtotal * 0.08;
-  const shipping = subtotal >= 100 ? 0 : 10;
+  const shipping = subtotal >= 10000 ? 0 : 500;
   const total = subtotal + tax + shipping;
 
   // Render clean custom confetti particles inside the success step
@@ -538,7 +538,7 @@ export default function CheckoutModal({
                               <span>Authorizing Securely...</span>
                             </div>
                           ) : (
-                            <span>Pay ${total.toFixed(2)} USD</span>
+                            <span>Pay {total.toFixed(0)} DA</span>
                           )}
                         </button>
                       </div>
@@ -587,7 +587,7 @@ export default function CheckoutModal({
                       </div>
                       <div className="flex justify-between border-t border-neutral-100 pt-2.5 text-black font-sans font-bold text-sm">
                         <span>Paid Total</span>
-                        <span className="font-mono">${total.toFixed(2)} USD</span>
+                        <span className="font-mono">{total.toFixed(0)} DA</span>
                       </div>
                     </div>
 
@@ -633,7 +633,7 @@ export default function CheckoutModal({
                           </span>
                         </div>
                         <span className="text-xs font-mono font-bold text-black">
-                          ${(item.product.price * item.quantity).toFixed(2)}
+                          {(item.product.price * item.quantity).toFixed(0)} DA
                         </span>
                       </div>
                     ))}
@@ -643,23 +643,23 @@ export default function CheckoutModal({
                   <div className="space-y-1.5 text-xs font-mono text-neutral-500 border-t border-neutral-100 pt-4">
                     <div className="flex justify-between">
                       <span>Subtotal</span>
-                      <span className="text-black">${subtotal.toFixed(2)}</span>
+                      <span className="text-black">{subtotal.toFixed(0)} DA</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Taxes (8%)</span>
-                      <span className="text-black">${tax.toFixed(2)}</span>
+                      <span className="text-black">{tax.toFixed(0)} DA</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Shipping</span>
                       <span className="text-black">
-                        {shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`}
+                        {shipping === 0 ? 'FREE' : `${shipping.toFixed(0)} DA`}
                       </span>
                     </div>
                   </div>
 
                   <div className="border-t border-neutral-100 pt-4 flex justify-between font-sans text-sm font-semibold text-black">
                     <span>Total Amount</span>
-                    <span className="text-base font-mono font-bold">${total.toFixed(2)} USD</span>
+                    <span className="text-base font-mono font-bold">{total.toFixed(0)} DA</span>
                   </div>
                 </div>
               )}

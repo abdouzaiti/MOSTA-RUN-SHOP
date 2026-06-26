@@ -303,7 +303,7 @@ export default function ProductList({
                       {product.title}
                     </h4>
                     <p className="text-xs font-bold text-neutral-500 font-mono">
-                      ${product.price.toFixed(2)} USD
+                      {product.price.toFixed(0)} DA
                     </p>
                   </div>
                 </div>

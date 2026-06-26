@@ -28,8 +28,8 @@ export default function CartDrawer({
   const subtotal = cartItems.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
   const taxRate = 0.08; // 8% sales tax
   const estimatedTax = subtotal * taxRate;
-  const shippingThreshold = 100;
-  const shippingCost = subtotal === 0 ? 0 : subtotal >= shippingThreshold ? 0 : 10;
+  const shippingThreshold = 10000;
+  const shippingCost = subtotal === 0 ? 0 : subtotal >= shippingThreshold ? 0 : 500;
   const total = subtotal + estimatedTax + shippingCost;
 
   return (
@@ -119,7 +119,7 @@ export default function CartDrawer({
                               {item.product.title}
                             </h4>
                             <span className="text-xs font-mono font-bold text-black whitespace-nowrap">
-                              ${(item.product.price * item.quantity).toFixed(2)}
+                              {(item.product.price * item.quantity).toFixed(0)} DA
                             </span>
                           </div>
                           {/* Selected Attributes badge row */}
@@ -183,28 +183,28 @@ export default function CartDrawer({
                 <div className="space-y-1.5 text-xs font-mono text-neutral-500">
                   <div className="flex justify-between">
                     <span>Subtotal</span>
-                    <span className="text-black">${subtotal.toFixed(2)}</span>
+                    <span className="text-black">{subtotal.toFixed(0)} DA</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Estimated Taxes (8%)</span>
-                    <span className="text-black">${estimatedTax.toFixed(2)}</span>
+                    <span className="text-black">{estimatedTax.toFixed(0)} DA</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Shipping</span>
                     <span className="text-black">
-                      {shippingCost === 0 ? 'FREE' : `$${shippingCost.toFixed(2)}`}
+                      {shippingCost === 0 ? 'FREE' : `${shippingCost.toFixed(0)} DA`}
                     </span>
                   </div>
                   {shippingCost > 0 && (
                     <p className="text-[10px] text-neutral-400 mt-1 leading-normal text-right">
-                      Add <span className="text-neutral-800 font-bold">${(shippingThreshold - subtotal).toFixed(2)}</span> more to unlock Free Shipping!
+                      Add <span className="text-neutral-800 font-bold">{(shippingThreshold - subtotal).toFixed(0)} DA</span> more to unlock Free Shipping!
                     </p>
                   )}
                 </div>
 
                 <div className="border-t border-neutral-100 pt-3 flex justify-between font-sans text-sm font-semibold text-black">
                   <span>Total</span>
-                  <span className="text-base font-mono font-bold">${total.toFixed(2)} USD</span>
+                  <span className="text-base font-mono font-bold">{total.toFixed(0)} DA</span>
                 </div>
 
                 <button

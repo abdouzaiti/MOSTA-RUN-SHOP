@@ -302,7 +302,7 @@ export default function ProductDetails({ product, onAddToCart, onBack, onSelectP
             {/* Price badge floating style in header */}
             <div className="mt-4 flex items-center gap-4">
               <div className="inline-flex items-center rounded-full border border-neutral-200 bg-neutral-50 py-1.5 px-4 text-sm font-semibold text-black">
-                <span className="font-mono">${currentPrice.toFixed(2)} {product.currency}</span>
+                <span className="font-mono">{currentPrice.toFixed(0)} DA</span>
               </div>
               <div className="text-xs text-neutral-500 bg-neutral-50 border border-neutral-100 rounded-full py-1 px-3">
                 Free shipping eligible
