@@ -73,7 +73,7 @@ export default function FeaturedGrid({ products, onSelectProduct }: FeaturedGrid
               T-Shirt Performance
             </span>
             <span className="rounded-full bg-black px-3.5 py-1.5 text-[11px] font-bold text-white font-mono">
-              ${largeItem.price.toFixed(2)} USD
+              {largeItem.price.toFixed(0)} DA
             </span>
           </div>
         </motion.div>
@@ -116,7 +116,7 @@ export default function FeaturedGrid({ products, onSelectProduct }: FeaturedGrid
               {rightTopItem.title}
             </span>
             <span className="rounded-full bg-black px-2.5 py-1 text-[10px] font-bold text-white font-mono">
-              ${rightTopItem.price.toFixed(2)} USD
+              {rightTopItem.price.toFixed(0)} DA
             </span>
           </div>
         </motion.div>
@@ -159,7 +159,7 @@ export default function FeaturedGrid({ products, onSelectProduct }: FeaturedGrid
               {rightBottomItem.title}
             </span>
             <span className="rounded-full bg-black px-2.5 py-1 text-[10px] font-bold text-white font-mono">
-              ${rightBottomItem.price.toFixed(2)} USD
+              {rightBottomItem.price.toFixed(0)} DA
             </span>
           </div>
         </motion.div>
