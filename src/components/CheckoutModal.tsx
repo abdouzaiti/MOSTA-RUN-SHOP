@@ -163,9 +163,9 @@ export default function CheckoutModal({
 
   // Pricing calculations
   const subtotal = cartItems.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
-  const tax = subtotal * 0.08;
+  const tax = 0;
   const shipping = subtotal >= 10000 ? 0 : 500;
-  const total = subtotal + tax + shipping;
+  const total = subtotal + shipping;
 
   // Render clean custom confetti particles inside the success step
   const ConfettiEmitter = () => {
@@ -534,10 +534,6 @@ export default function CheckoutModal({
                     <div className="flex justify-between">
                       <span>Subtotal</span>
                       <span className="text-black">{subtotal.toFixed(0)} DA</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Taxes (8%)</span>
-                      <span className="text-black">{tax.toFixed(0)} DA</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Shipping</span>
