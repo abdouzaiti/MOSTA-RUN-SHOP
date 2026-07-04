@@ -104,15 +104,22 @@ export default function AdminDashboard() {
     <div className="min-h-screen bg-neutral-50 p-4 md:p-8 font-sans text-neutral-900">
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-neutral-200 pb-5">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-neutral-200 pb-5 relative">
           <div className="space-y-1">
-            <h1 className="text-3xl font-black tracking-tight text-neutral-900 uppercase italic">
-              MRC <span className="text-[#0D5DF1]">Admin</span> Dashboard
-            </h1>
             <p className="text-sm text-neutral-500 font-medium">
               Consulter, filtrer et gérer toutes les commandes du club.
             </p>
           </div>
+
+          <div className="flex justify-center items-center md:absolute md:left-1/2 md:-translate-x-1/2 py-2 md:py-0">
+            <img
+              src="/logo.png"
+              alt="Mosta Run Club Logo"
+              className="h-14 w-auto object-contain select-none"
+              referrerPolicy="no-referrer"
+            />
+          </div>
+
           <button 
             onClick={fetchOrders}
             className="flex items-center gap-2 px-4 py-2 bg-white border border-neutral-200 rounded-xl text-sm font-semibold hover:bg-neutral-50 transition-colors shadow-sm self-start md:self-auto"

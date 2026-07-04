@@ -242,9 +242,6 @@ export default function App() {
                     <span className="text-xs font-bold tracking-widest text-white/90 bg-white/20 px-3 py-1 rounded-full uppercase backdrop-blur-sm font-sans">
                       Rejoins le Club
                     </span>
-                    <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-none uppercase italic font-sans">
-                      Mosta Run Club
-                    </h1>
                     <p className="text-sm md:text-base text-neutral-200 font-medium max-w-md mx-auto">
                       Courons Ensemble. Plus Forts Chaque Jour.
                     </p>
@@ -306,57 +303,57 @@ export default function App() {
                 </div>
 
                 <div className="grid md:grid-cols-3 gap-6">
-                  {/* Tuesday */}
+                  {/* Sunday Evening */}
+                  <div className="p-6 rounded-2xl bg-white border border-neutral-100 shadow-sm space-y-4">
+                    <div className="flex justify-between items-center border-b border-neutral-100 pb-3">
+                      <span className="text-xs font-extrabold text-[#0D5DF1] tracking-wider uppercase">Dimanche Soir</span>
+                      <span className="text-xs font-mono font-bold bg-neutral-100 text-neutral-800 px-2.5 py-1 rounded-md">18h30</span>
+                    </div>
+                    <div className="space-y-1.5">
+                      <h4 className="text-sm font-bold text-neutral-900">Séance de Renforcement</h4>
+                      <p className="text-xs text-neutral-500 leading-relaxed">
+                        Idéal pour renforcer l'ensemble du corps, améliorer la posture et optimiser la foulée pour la course à pied.
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-xs text-neutral-400 font-medium">
+                      <span>📍</span>
+                      <span>Complexe Raid Ferradj</span>
+                    </div>
+                  </div>
+
+                  {/* Tuesday Evening */}
                   <div className="p-6 rounded-2xl bg-white border border-neutral-100 shadow-sm space-y-4">
                     <div className="flex justify-between items-center border-b border-neutral-100 pb-3">
                       <span className="text-xs font-extrabold text-[#0D5DF1] tracking-wider uppercase">Mardi Soir</span>
                       <span className="text-xs font-mono font-bold bg-neutral-100 text-neutral-800 px-2.5 py-1 rounded-md">18h30</span>
                     </div>
                     <div className="space-y-1.5">
-                      <h4 className="text-sm font-bold text-neutral-900">Fractionné & Vitesse</h4>
+                      <h4 className="text-sm font-bold text-neutral-900">Travail Fractionné</h4>
                       <p className="text-xs text-neutral-500 leading-relaxed">
-                        Idéal pour développer votre cardio, votre endurance et votre vitesse. Séance encadrée sur la piste d'athlétisme municipale.
+                        Développez votre capacité cardio-respiratoire et gagnez en vitesse de course grâce à des entraînements par intervalles rythmés.
                       </p>
                     </div>
                     <div className="flex items-center gap-1.5 text-xs text-neutral-400 font-medium">
                       <span>📍</span>
-                      <span>Stade de la Ville, Piste Principale</span>
+                      <span>Complexe Raid Ferradj</span>
                     </div>
                   </div>
 
-                  {/* Thursday */}
+                  {/* Friday Morning */}
                   <div className="p-6 rounded-2xl bg-white border border-neutral-100 shadow-sm space-y-4">
                     <div className="flex justify-between items-center border-b border-neutral-100 pb-3">
-                      <span className="text-xs font-extrabold text-[#0D5DF1] tracking-wider uppercase">Jeudi Soir</span>
-                      <span className="text-xs font-mono font-bold bg-neutral-100 text-neutral-800 px-2.5 py-1 rounded-md">19h00</span>
+                      <span className="text-xs font-extrabold text-[#0D5DF1] tracking-wider uppercase">Vendredi Matin</span>
+                      <span className="text-xs font-mono font-bold bg-neutral-100 text-neutral-800 px-2.5 py-1 rounded-md">07h30</span>
                     </div>
                     <div className="space-y-1.5">
-                      <h4 className="text-sm font-bold text-neutral-900">Run Urbain & Social</h4>
+                      <h4 className="text-sm font-bold text-neutral-900">La Sortie Longue</h4>
                       <p className="text-xs text-neutral-500 leading-relaxed">
-                        Un run de 6 à 10 km à un rythme conversationnel à travers la ville. Le run parfait pour papoter et se vider la tête de la journée.
+                        Le rendez-vous incontournable pour développer l'endurance fondamentale sur de longues distances dans une ambiance conviviale.
                       </p>
                     </div>
                     <div className="flex items-center gap-1.5 text-xs text-neutral-400 font-medium">
                       <span>📍</span>
-                      <span>Départ de la boutique Mosta Club</span>
-                    </div>
-                  </div>
-
-                  {/* Sunday */}
-                  <div className="p-6 rounded-2xl bg-white border border-neutral-100 shadow-sm space-y-4">
-                    <div className="flex justify-between items-center border-b border-neutral-100 pb-3">
-                      <span className="text-xs font-extrabold text-[#0D5DF1] tracking-wider uppercase">Dimanche Matin</span>
-                      <span className="text-xs font-mono font-bold bg-neutral-100 text-neutral-800 px-2.5 py-1 rounded-md">09h30</span>
-                    </div>
-                    <div className="space-y-1.5">
-                      <h4 className="text-sm font-bold text-neutral-900">La Sortie Longue & Café</h4>
-                      <p className="text-xs text-neutral-500 leading-relaxed">
-                        Sortie nature de 12 à 20 km avec différentes allures. On termine toujours autour d'un bon café chaud et de viennoiseries !
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-1.5 text-xs text-neutral-400 font-medium">
-                      <span>📍</span>
-                      <span>Parc Forestier, Entrée Sud</span>
+                      <span>Départ Sortie Longue</span>
                     </div>
                   </div>
                 </div>
