@@ -19,6 +19,7 @@ interface Order {
 }
 
 export default function AdminDashboard() {
+  console.log('AdminDashboard rendering');
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -244,12 +245,12 @@ export default function AdminDashboard() {
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex -space-x-2 overflow-hidden">
-                          {order.items.slice(0, 3).map((item, idx) => (
+                          {Array.isArray(order.items) && order.items.slice(0, 3).map((item, idx) => (
                             <div key={idx} className="h-8 w-8 rounded-lg border-2 border-white bg-white flex items-center justify-center shadow-sm overflow-hidden">
                               <img src={item.image} alt="" className="h-6 w-6 object-contain" />
                             </div>
                           ))}
-                          {order.items.length > 3 && (
+                          {Array.isArray(order.items) && order.items.length > 3 && (
                             <div className="h-8 w-8 rounded-lg border-2 border-white bg-neutral-100 flex items-center justify-center text-[10px] font-bold text-neutral-500 shadow-sm">
                               +{order.items.length - 3}
                             </div>
