@@ -106,7 +106,7 @@ export default function ProductList({
             </h2>
           )}
           <p className="mt-1 text-xs text-neutral-400 font-mono">
-            {sortedProducts.length} {sortedProducts.length === 1 ? 'product' : 'products'} found
+            {sortedProducts.length} {sortedProducts.length === 1 ? 'produit' : 'produits'} trouvé(s)
           </p>
         </div>
 
@@ -153,7 +153,7 @@ export default function ProductList({
           {/* Sort Selector */}
           <div>
             <h3 className="text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-4 font-mono">
-              Sort by
+              Trier par
             </h3>
             <ul className="space-y-2">
               {sortOptions.map((option) => (
@@ -204,7 +204,7 @@ export default function ProductList({
 
             <div>
               <h4 className="text-[10px] font-semibold uppercase tracking-wider text-neutral-400 mb-2 font-mono">
-                Sort by
+                Trier par
               </h4>
               <div className="flex flex-col gap-1.5 items-start">
                 {sortOptions.map((option) => (

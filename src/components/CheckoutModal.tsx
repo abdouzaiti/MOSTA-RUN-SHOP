@@ -8,6 +8,7 @@ import { CartItem, CheckoutDetails } from '../types';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, CreditCard, ChevronRight, CheckCircle2, ShieldCheck, HelpCircle, Loader2 } from 'lucide-react';
 import { getSupabase } from '../lib/supabase';
+import { WILAYAS_BALADIYAT } from '../lib/algeria-data';
 
 interface CheckoutModalProps {
   isOpen: boolean;
@@ -31,16 +32,13 @@ export default function CheckoutModal({
 
   // Form states
   const [form, setForm] = useState<CheckoutDetails>({
-    email: '',
     firstName: '',
     lastName: '',
     address: '',
-    city: '',
-    postalCode: '',
-    country: 'United States',
-    cardNumber: '',
-    cardExpiry: '',
-    cardCvc: '',
+    phone: '',
+    wilaya: '',
+    baladiya: '',
+    deliveryMethod: 'home',
   });
 
   const [cardFocused, setCardFocused] = useState(false); // flips card to CVV back
@@ -50,16 +48,13 @@ export default function CheckoutModal({
       setStep('shipping');
       setIsProcessing(false);
       setForm({
-        email: '',
         firstName: '',
         lastName: '',
         address: '',
-        city: '',
-        postalCode: '',
-        country: 'United States',
-        cardNumber: '',
-        cardExpiry: '',
-        cardCvc: '',
+        phone: '',
+        wilaya: '',
+        baladiya: '',
+        deliveryMethod: 'home',
       });
       // Generate a random high-fidelity order number
       const randomId = Math.floor(100000 + Math.random() * 900000);
@@ -105,20 +100,15 @@ export default function CheckoutModal({
 
   const handleShippingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.email || !form.firstName || !form.lastName || !form.address || !form.city || !form.postalCode) {
+    if (!form.firstName || !form.lastName || !form.address || !form.phone || !form.wilaya || !form.baladiya) {
       alert('Please fill out all required shipping details.');
       return;
     }
-    setStep('payment');
+    // Directly process order as payment is cash on delivery
+    handleOrderProcessing();
   };
 
-  const handlePaymentSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!form.cardNumber || !form.cardExpiry || !form.cardCvc) {
-      alert('Please fill out your card details.');
-      return;
-    }
-
+  const handleOrderProcessing = async () => {
     setIsProcessing(true);
     
     try {
@@ -127,15 +117,16 @@ export default function CheckoutModal({
 
       // 2. Save Order to Supabase
       const orderData = {
-        email: form.email,
         first_name: form.firstName,
         last_name: form.lastName,
         address: form.address,
-        city: form.city,
-        postal_code: form.postalCode,
-        country: form.country,
+        phone: form.phone,
+        wilaya: form.wilaya,
+        baladiya: form.baladiya,
+        delivery_method: form.deliveryMethod,
         total: total,
         status: 'pending',
+        payment_method: 'Cash on Delivery',
         items: cartItems.map(item => ({
           id: item.product.id,
           title: item.product.title,
@@ -256,7 +247,7 @@ export default function CheckoutModal({
                   </div>
                 )}
                 <span className="font-sans text-xs font-bold uppercase text-neutral-400 tracking-wider">
-                  | Checkout
+                  | Paiement
                 </span>
               </div>
 
@@ -275,16 +266,8 @@ export default function CheckoutModal({
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 md:py-12">
             {/* Step Indicators */}
             <div className="flex items-center justify-center gap-2 md:gap-4 mb-8 md:mb-12 max-w-lg mx-auto text-xs font-mono uppercase tracking-wider text-neutral-400">
-              <span className={step === 'shipping' ? 'text-black font-bold' : 'text-neutral-300'}>
-                1. Shipping
-              </span>
-              <ChevronRight className="h-3 w-3 text-neutral-200" />
-              <span className={step === 'payment' ? 'text-black font-bold' : 'text-neutral-300'}>
-                2. Payment
-              </span>
-              <ChevronRight className="h-3 w-3 text-neutral-200" />
-              <span className={step === 'success' ? 'text-green-600 font-bold' : 'text-neutral-300'}>
-                3. Confirmation
+              <span className="text-black font-bold">
+                1. Livraison
               </span>
             </div>
 
@@ -298,12 +281,12 @@ export default function CheckoutModal({
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 20 }}
                   >
-                    <h2 className="text-xl font-bold font-display mb-6">Shipping Address</h2>
+                    <h2 className="text-xl font-bold font-display mb-6">Détails de Livraison</h2>
                     <form onSubmit={handleShippingSubmit} className="space-y-4" id="shipping-form">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                           <label className="block text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1.5">
-                            First Name *
+                            Prénom *
                           </label>
                           <input
                             required
@@ -317,7 +300,7 @@ export default function CheckoutModal({
                         </div>
                         <div>
                           <label className="block text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1.5">
-                            Last Name *
+                            Nom de famille *
                           </label>
                           <input
                             required
@@ -333,22 +316,74 @@ export default function CheckoutModal({
 
                       <div>
                         <label className="block text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1.5">
-                          Email Address *
+                          Numéro de téléphone *
                         </label>
                         <input
                           required
-                          type="email"
-                          name="email"
-                          value={form.email}
+                          type="tel"
+                          name="phone"
+                          value={form.phone}
                           onChange={handleInputChange}
-                          placeholder="johndoe@example.com"
+                          placeholder="05XXXXXXXX"
                           className="w-full h-11 rounded-lg bg-white border border-neutral-200 px-4 text-sm text-black outline-none focus:border-neutral-400"
                         />
                       </div>
 
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                         <div>
+                          <label className="block text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1.5">
+                            Wilaya *
+                          </label>
+                          <select
+                            required
+                            name="wilaya"
+                            value={form.wilaya}
+                            onChange={(e) => {
+                                handleInputChange(e);
+                                setForm(prev => ({ ...prev, baladiya: '' })); // Reset baladiya
+                            }}
+                            className="w-full h-11 rounded-lg bg-white border border-neutral-200 px-4 text-sm text-black outline-none focus:border-neutral-400"
+                          >
+                            <option value="">Sélectionnez une Wilaya</option>
+                            {Object.keys(WILAYAS_BALADIYAT).map(wilaya => (
+                                <option key={wilaya} value={wilaya}>{wilaya}</option>
+                            ))}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1.5">
+                            Baladiya *
+                          </label>
+                          {form.wilaya && WILAYAS_BALADIYAT[form.wilaya] && WILAYAS_BALADIYAT[form.wilaya].length > 0 ? (
+                            <select
+                                required
+                                name="baladiya"
+                                value={form.baladiya}
+                                onChange={handleInputChange}
+                                className="w-full h-11 rounded-lg bg-white border border-neutral-200 px-4 text-sm text-black outline-none focus:border-neutral-400"
+                            >
+                                <option value="">Sélectionnez une Baladiya</option>
+                                {WILAYAS_BALADIYAT[form.wilaya].map(baladiya => (
+                                    <option key={baladiya} value={baladiya}>{baladiya}</option>
+                                ))}
+                            </select>
+                          ) : (
+                            <input
+                                required
+                                type="text"
+                                name="baladiya"
+                                value={form.baladiya}
+                                onChange={handleInputChange}
+                                placeholder="Baladiya"
+                                className="w-full h-11 rounded-lg bg-white border border-neutral-200 px-4 text-sm text-black outline-none focus:border-neutral-400"
+                            />
+                          )}
+                        </div>
+                      </div>
+
                       <div>
                         <label className="block text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1.5">
-                          Street Address *
+                          Adresse *
                         </label>
                         <input
                           required
@@ -356,238 +391,49 @@ export default function CheckoutModal({
                           name="address"
                           value={form.address}
                           onChange={handleInputChange}
-                          placeholder="123 Luxury Avenue, Suite 100"
+                          placeholder="Votre adresse"
                           className="w-full h-11 rounded-lg bg-white border border-neutral-200 px-4 text-sm text-black outline-none focus:border-neutral-400"
                         />
                       </div>
 
-                      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                        <div className="col-span-1">
-                          <label className="block text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1.5">
-                            City *
-                          </label>
-                          <input
-                            required
-                            type="text"
-                            name="city"
-                            value={form.city}
-                            onChange={handleInputChange}
-                            placeholder="New York"
-                            className="w-full h-11 rounded-lg bg-white border border-neutral-200 px-4 text-sm text-black outline-none focus:border-neutral-400"
-                          />
-                        </div>
-                        <div className="col-span-1">
-                          <label className="block text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1.5">
-                            Postal Code *
-                          </label>
-                          <input
-                            required
-                            type="text"
-                            name="postalCode"
-                            value={form.postalCode}
-                            onChange={handleInputChange}
-                            placeholder="10001"
-                            className="w-full h-11 rounded-lg bg-white border border-neutral-200 px-4 text-sm text-black outline-none focus:border-neutral-400"
-                          />
-                        </div>
-                        <div className="col-span-2 md:col-span-1">
-                          <label className="block text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1.5">
-                            Country *
-                          </label>
-                          <select
-                            name="country"
-                            value={form.country}
-                            onChange={handleInputChange}
-                            className="w-full h-11 rounded-lg bg-white border border-neutral-200 px-4 text-sm text-black outline-none focus:border-neutral-400"
-                          >
-                            <option>United States</option>
-                            <option>Canada</option>
-                            <option>United Kingdom</option>
-                            <option>Germany</option>
-                            <option>France</option>
-                          </select>
+                      <div>
+                        <label className="block text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-3">
+                          Mode de livraison *
+                        </label>
+                        <div className="flex gap-4">
+                            <label className="flex items-center gap-2 text-sm">
+                                <input type="radio" name="deliveryMethod" value="home" checked={form.deliveryMethod === 'home'} onChange={handleInputChange} />
+                                Livraison à domicile
+                            </label>
+                            <label className="flex items-center gap-2 text-sm">
+                                <input type="radio" name="deliveryMethod" value="desk" checked={form.deliveryMethod === 'desk'} onChange={handleInputChange} />
+                                Point Relais
+                            </label>
                         </div>
                       </div>
 
                       <div className="pt-4">
                         <button
                           type="submit"
-                          className="w-full flex h-12 items-center justify-center rounded-xl bg-black text-sm font-semibold text-white transition-colors hover:bg-neutral-800"
+                          disabled={isProcessing}
+                          className="w-full flex h-12 items-center justify-center rounded-xl bg-black text-sm font-semibold text-white transition-colors hover:bg-neutral-800 disabled:opacity-50"
                           id="shipping-submit-btn"
                         >
-                          Continue to Payment
-                        </button>
-                      </div>
-                    </form>
-                  </motion.div>
-                )}
-
-                {step === 'payment' && (
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 20 }}
-                  >
-                    <h2 className="text-xl font-bold font-display mb-6">Payment Method</h2>
-
-                    {/* Highly interactive 3D style credit card */}
-                    <div className="relative mx-auto w-full max-w-sm h-48 rounded-xl bg-gradient-to-br from-neutral-800 via-neutral-900 to-black p-6 border border-neutral-700 shadow-xl overflow-hidden mb-8">
-                      {/* Grid overlay lines on the card */}
-                      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:2rem_2rem]" />
-
-                      <AnimatePresence mode="wait">
-                        {!cardFocused ? (
-                          // Front of the Card
-                          <motion.div
-                            key="front"
-                            initial={{ opacity: 0, rotateY: 90 }}
-                            animate={{ opacity: 1, rotateY: 0 }}
-                            exit={{ opacity: 0, rotateY: -90 }}
-                            className="h-full flex flex-col justify-between relative z-10"
-                          >
-                            <div className="flex justify-between items-start">
-                              <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400">
-                                {getCardType()}
-                              </span>
-                              <CreditCard className="h-6 w-6 text-neutral-400" />
-                            </div>
-
-                            {/* Card digits display */}
-                            <div className="text-lg md:text-xl font-mono tracking-widest text-white py-2">
-                              {form.cardNumber || '•••• •••• •••• ••••'}
-                            </div>
-
-                            <div className="flex justify-between items-end">
-                              <div>
-                                <span className="block text-[8px] font-mono uppercase text-neutral-500">
-                                  Cardholder
-                                </span>
-                                <span className="text-xs font-medium uppercase font-sans truncate max-w-[180px] block text-white">
-                                  {form.firstName || form.lastName
-                                    ? `${form.firstName} ${form.lastName}`
-                                    : 'Your Name'}
-                                </span>
-                              </div>
-                              <div>
-                                <span className="block text-[8px] font-mono uppercase text-neutral-500">
-                                  Expires
-                                </span>
-                                <span className="text-xs font-mono text-white">
-                                  {form.cardExpiry || 'MM/YY'}
-                                </span>
-                              </div>
-                            </div>
-                          </motion.div>
-                        ) : (
-                          // Back of the Card (CVV focus)
-                          <motion.div
-                            key="back"
-                            initial={{ opacity: 0, rotateY: -90 }}
-                            animate={{ opacity: 1, rotateY: 0 }}
-                            exit={{ opacity: 0, rotateY: 90 }}
-                            className="h-full flex flex-col justify-between relative z-10"
-                          >
-                            <div className="w-full h-8 bg-neutral-950 -mx-6 mt-2" />
-                            <div className="flex justify-end items-center pr-4">
-                              <span className="text-[8px] font-mono uppercase text-neutral-500 mr-2">
-                                Security Code
-                              </span>
-                              <div className="bg-white text-black font-mono text-xs px-2.5 py-1 rounded">
-                                {form.cardCvc || '•••'}
-                              </div>
-                            </div>
-                            <div className="text-[8px] font-mono text-neutral-500 text-center uppercase leading-tight">
-                              This card is securely simulated inside the sandbox sandbox-gateway.
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-
-                    <form onSubmit={handlePaymentSubmit} className="space-y-4" id="payment-form">
-                      <div>
-                        <label className="block text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1.5">
-                          Card Number *
-                        </label>
-                        <input
-                          required
-                          type="text"
-                          name="cardNumber"
-                          value={form.cardNumber}
-                          onChange={handleInputChange}
-                          onFocus={() => setCardFocused(false)}
-                          placeholder="4000 1234 5678 9010"
-                          className="w-full h-11 rounded-lg bg-white border border-neutral-200 px-4 text-sm text-black outline-none focus:border-neutral-400"
-                        />
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <label className="block text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1.5">
-                            Expiration Date *
-                          </label>
-                          <input
-                            required
-                            type="text"
-                            name="cardExpiry"
-                            value={form.cardExpiry}
-                            onChange={handleInputChange}
-                            onFocus={() => setCardFocused(false)}
-                            placeholder="MM/YY"
-                            className="w-full h-11 rounded-lg bg-white border border-neutral-200 px-4 text-sm text-black outline-none focus:border-neutral-400"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1.5">
-                            CVC / CVV *
-                          </label>
-                          <input
-                            required
-                            type="password"
-                            name="cardCvc"
-                            value={form.cardCvc}
-                            onChange={handleInputChange}
-                            onFocus={() => setCardFocused(true)}
-                            onBlur={() => setCardFocused(false)}
-                            placeholder="•••"
-                            className="w-full h-11 rounded-lg bg-white border border-neutral-200 px-4 text-sm text-black outline-none focus:border-neutral-400"
-                          />
-                        </div>
-                      </div>
-
-                      {/* Security details indicator */}
-                      <div className="flex items-center gap-2 p-3.5 rounded-lg bg-neutral-50 border border-neutral-100 text-xs text-neutral-500">
-                        <ShieldCheck className="h-4 w-4 text-green-600 animate-pulse" />
-                        <span>Secured by 256-bit SSL encryption. This is a sandbox order checkout.</span>
-                      </div>
-
-                      <div className="pt-4 flex gap-3">
-                        <button
-                          type="button"
-                          onClick={() => setStep('shipping')}
-                          className="w-1/3 flex h-12 items-center justify-center rounded-xl border border-neutral-200 text-sm font-semibold text-neutral-500 hover:text-black hover:border-neutral-300"
-                        >
-                          Back
-                        </button>
-                        <button
-                          type="submit"
-                          disabled={isProcessing}
-                          className="flex-1 flex h-12 items-center justify-center rounded-xl bg-black text-sm font-semibold text-white transition-colors hover:bg-neutral-800 disabled:opacity-50"
-                          id="payment-submit-btn"
-                        >
                           {isProcessing ? (
-                            <div className="flex items-center gap-2">
-                              <Loader2 className="h-4 w-4 animate-spin" />
-                              <span>Authorizing Securely...</span>
-                            </div>
-                          ) : (
-                            <span>Pay {total.toFixed(0)} DA</span>
-                          )}
+                              <div className="flex items-center gap-2">
+                                <Loader2 className="h-4 w-4 animate-spin" />
+                                <span>Traitement...</span>
+                              </div>
+                            ) : (
+                              <span>Commander (Paiement à la livraison)</span>
+                            )}
                         </button>
                       </div>
                     </form>
                   </motion.div>
                 )}
+
+                {/* Removed Payment Step */}
 
                 {step === 'success' && (
                   <motion.div
@@ -609,7 +455,7 @@ export default function CheckoutModal({
                       Order Confirmed!
                     </h1>
                     <p className="text-neutral-500 text-sm max-w-md mb-6 leading-relaxed">
-                      Thank you for your purchase, <span className="text-black font-semibold">{form.firstName}</span>! Your order has been placed successfully. A digital receipt and tracking details have been dispatched to <span className="text-black font-semibold">{form.email}</span>.
+                      Thank you for your purchase, <span className="text-black font-semibold">{form.firstName}</span>! Your order has been placed successfully. A digital receipt and tracking details have been dispatched.
                     </p>
 
                     {/* Receipt Specifications Card */}

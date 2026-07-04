@@ -6,19 +6,19 @@
 import { Product, Category, SortOption } from './types';
 
 export const CATEGORIES: Category[] = [
-  { slug: 'all', name: 'All' },
+  { slug: 'all', name: 'Tous' },
   { slug: 't-shirts', name: 'T-Shirts' },
   { slug: 'polos', name: 'Polos' },
-  { slug: 'caps', name: 'Caps' },
+  { slug: 'caps', name: 'Casquettes' },
   { slug: 'collections', name: 'Collections' },
-  { slug: 'about', name: 'About' },
+  { slug: 'about', name: 'À propos' },
 ];
 
 export const SORT_OPTIONS: SortOption[] = [
-  { key: 'relevance', label: 'Relevance' },
-  { key: 'trending', label: 'Trending' },
-  { key: 'price-asc', label: 'Price: Low to High' },
-  { key: 'price-desc', label: 'Price: High to Low' },
+  { key: 'relevance', label: 'Pertinence' },
+  { key: 'trending', label: 'Tendances' },
+  { key: 'price-asc', label: 'Prix : croissant' },
+  { key: 'price-desc', label: 'Prix : décroissant' },
 ];
 
 export const PRODUCTS: Product[] = [

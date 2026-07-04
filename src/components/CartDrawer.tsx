@@ -26,11 +26,9 @@ export default function CartDrawer({
   onProceedToCheckout,
 }: CartDrawerProps) {
   const subtotal = cartItems.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
-  const taxRate = 0.08; // 8% sales tax
-  const estimatedTax = subtotal * taxRate;
   const shippingThreshold = 10000;
   const shippingCost = subtotal === 0 ? 0 : subtotal >= shippingThreshold ? 0 : 500;
-  const total = subtotal + estimatedTax + shippingCost;
+  const total = subtotal + shippingCost;
 
   return (
     <AnimatePresence>
@@ -58,13 +56,13 @@ export default function CartDrawer({
             {/* Header */}
             <div className="flex h-16 items-center justify-between border-b border-neutral-100 px-6">
               <h2 className="text-base font-semibold text-black tracking-wide font-sans">
-                Shopping Cart
+                Panier
               </h2>
               <button
                 onClick={onClose}
                 className="flex h-10 w-10 items-center justify-center rounded-lg border border-neutral-200 text-neutral-500 hover:text-black hover:border-neutral-300 transition-all focus:outline-none"
                 id="close-cart-btn"
-                aria-label="Close Cart"
+                aria-label="Fermer le panier"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -77,16 +75,16 @@ export default function CartDrawer({
                   <div className="flex h-16 w-16 items-center justify-center rounded-full bg-neutral-50 border border-neutral-200 text-neutral-500 mb-4">
                     <ShoppingBag className="h-6 w-6" />
                   </div>
-                  <h3 className="text-sm font-semibold text-black mb-1">Your cart is empty</h3>
+                  <h3 className="text-sm font-semibold text-black mb-1">Votre panier est vide</h3>
                   <p className="text-xs text-neutral-400 max-w-xs mb-6 leading-relaxed">
-                    Looks like you haven't added anything to your cart yet. Let's find some premium items.
+                    Il semble que vous n'ayez encore rien ajouté à votre panier. Trouvez des articles premium.
                   </p>
                   <button
                     onClick={onClose}
                     className="h-10 px-5 rounded-full bg-black text-white font-semibold text-xs transition-colors hover:bg-neutral-800"
                     id="cart-start-shopping-btn"
                   >
-                    Start Shopping
+                    Commencer mes achats
                   </button>
                 </div>
               ) : (
@@ -125,7 +123,7 @@ export default function CartDrawer({
                           {/* Selected Attributes badge row */}
                           <div className="mt-1 flex flex-wrap gap-1.5 items-center">
                             <span className="inline-flex items-center gap-1 text-[10px] font-mono text-neutral-500 bg-white border border-neutral-200 rounded px-1.5 py-0.5">
-                              Size: {item.selectedSize}
+                              Taille: {item.selectedSize}
                             </span>
                             <span className="inline-flex items-center gap-1 text-[10px] font-mono text-neutral-500 bg-white border border-neutral-200 rounded px-1.5 py-0.5">
                               <span
@@ -144,7 +142,7 @@ export default function CartDrawer({
                               onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
                               className="text-neutral-400 hover:text-black p-1"
                               id={`cart-qty-minus-${item.id}`}
-                              aria-label="Decrease quantity"
+                              aria-label="Diminuer la quantité"
                             >
                               <Minus className="h-3 w-3" />
                             </button>
@@ -155,7 +153,7 @@ export default function CartDrawer({
                               onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
                               className="text-neutral-400 hover:text-black p-1"
                               id={`cart-qty-plus-${item.id}`}
-                              aria-label="Increase quantity"
+                              aria-label="Augmenter la quantité"
                             >
                               <Plus className="h-3 w-3" />
                             </button>
@@ -165,7 +163,7 @@ export default function CartDrawer({
                             onClick={() => onRemoveItem(item.id)}
                             className="text-neutral-400 hover:text-red-500 p-1"
                             id={`cart-item-remove-${item.id}`}
-                            aria-label="Remove item"
+                            aria-label="Supprimer l'article"
                           >
                             <Trash2 className="h-3.5 w-3.5" />
                           </button>
@@ -182,22 +180,18 @@ export default function CartDrawer({
               <div className="border-t border-neutral-100 bg-neutral-50 px-6 py-6 space-y-4">
                 <div className="space-y-1.5 text-xs font-mono text-neutral-500">
                   <div className="flex justify-between">
-                    <span>Subtotal</span>
+                    <span>Sous-total</span>
                     <span className="text-black">{subtotal.toFixed(0)} DA</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Estimated Taxes (8%)</span>
-                    <span className="text-black">{estimatedTax.toFixed(0)} DA</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Shipping</span>
+                    <span>Livraison</span>
                     <span className="text-black">
-                      {shippingCost === 0 ? 'FREE' : `${shippingCost.toFixed(0)} DA`}
+                      {shippingCost === 0 ? 'GRATUIT' : `${shippingCost.toFixed(0)} DA`}
                     </span>
                   </div>
                   {shippingCost > 0 && (
                     <p className="text-[10px] text-neutral-400 mt-1 leading-normal text-right">
-                      Add <span className="text-neutral-800 font-bold">{(shippingThreshold - subtotal).toFixed(0)} DA</span> more to unlock Free Shipping!
+                      Ajoutez <span className="text-neutral-800 font-bold">{(shippingThreshold - subtotal).toFixed(0)} DA</span> de plus pour bénéficier de la Livraison Gratuite !
                     </p>
                   )}
                 </div>
@@ -206,13 +200,18 @@ export default function CartDrawer({
                   <span>Total</span>
                   <span className="text-base font-mono font-bold">{total.toFixed(0)} DA</span>
                 </div>
+                
+                <div className="text-[10px] text-neutral-500 font-mono text-center pt-2">
+                  <p>Paiement: À la livraison</p>
+                  <p>Livraison: Algérie uniquement</p>
+                </div>
 
                 <button
                   onClick={onProceedToCheckout}
                   className="mt-2 flex w-full items-center justify-center gap-2 h-12 rounded-xl bg-black text-sm font-semibold text-white transition-colors hover:bg-neutral-800"
                   id="cart-checkout-btn"
                 >
-                  Proceed to Checkout
+                  Passer à la caisse
                   <ArrowRight className="h-4 w-4" />
                 </button>
               </div>

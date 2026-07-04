@@ -14,7 +14,6 @@ import AdminDashboard from './components/AdminDashboard';
 import { Product, CartItem, SortKey, Color } from './types';
 import { PRODUCTS, CATEGORIES, SORT_OPTIONS } from './data';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowUpRight, Github } from 'lucide-react';
 
 export default function App() {
   // Navigation & Search State
@@ -213,7 +212,7 @@ export default function App() {
                       Mosta Run Club
                     </h1>
                     <p className="text-sm md:text-base text-neutral-200 font-medium max-w-md mx-auto">
-                      Run Together. Stronger Every Day.
+                      Courons Ensemble. Plus Forts Chaque Jour.
                     </p>
                   </div>
                 </div>
@@ -243,7 +242,7 @@ export default function App() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="p-6 rounded-2xl border border-neutral-100 bg-neutral-50 text-center space-y-1">
-                    <span className="block text-3xl font-black text-[#0D5DF1]">500+</span>
+                    <span className="block text-3xl font-black text-[#0D5DF1]">50+</span>
                     <span className="block text-[11px] font-bold text-neutral-500 uppercase tracking-wider">Membres Actifs</span>
                   </div>
                   <div className="p-6 rounded-2xl border border-neutral-100 bg-neutral-50 text-center space-y-1">
@@ -407,23 +406,13 @@ export default function App() {
       <footer className="border-t border-neutral-100 bg-neutral-50/60 py-10" id="site-footer">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2 text-xs font-mono text-neutral-400">
-            <span className="text-[#0D5DF1] font-bold italic">MOSTA RUN CLUB</span>
-            <span>© {new Date().getFullYear()} Mosta Run Club. All rights reserved.</span>
+            <span className="text-[#0D5DF1] font-bold italic">MRC</span>
+            <span>© {new Date().getFullYear()} Mosta Run Club. Tous droits réservés.</span>
           </div>
 
           <div className="flex items-center gap-6 text-xs font-mono text-neutral-400">
-            <a
-              href="https://github.com/vercel/commerce"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1 hover:text-black transition-colors"
-            >
-              <Github className="h-3.5 w-3.5" />
-              <span>Next.js Commerce Reference</span>
-              <ArrowUpRight className="h-2.5 w-2.5" />
-            </a>
             <span className="hidden sm:inline text-neutral-200">|</span>
-            <span className="hidden sm:inline">Mocked Stripe Sandbox Gateways</span>
+            <span className="hidden sm:inline">Portail de Paiement Sandbox</span>
           </div>
         </div>
       </footer>

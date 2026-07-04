@@ -102,7 +102,7 @@ export default function Header({
           <form onSubmit={handleSearchSubmit} className="relative">
             <input
               type="text"
-              placeholder="Search for products..."
+              placeholder="Rechercher des produits..."
               value={localSearch}
               onChange={(e) => {
                 setLocalSearch(e.target.value);

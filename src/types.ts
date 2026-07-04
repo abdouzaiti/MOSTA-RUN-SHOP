@@ -45,14 +45,11 @@ export interface Category {
 }
 
 export interface CheckoutDetails {
-  email: string;
   firstName: string;
   lastName: string;
   address: string;
-  city: string;
-  postalCode: string;
-  country: string;
-  cardNumber: string;
-  cardExpiry: string;
-  cardCvc: string;
+  phone: string;
+  wilaya: string;
+  baladiya: string;
+  deliveryMethod: 'desk' | 'home';
 }
