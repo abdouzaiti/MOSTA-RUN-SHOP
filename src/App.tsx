@@ -28,6 +28,40 @@ export default function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [isAdminView, setIsAdminView] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [loginUsername, setLoginUsername] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
+  const [footerClickCount, setFooterClickCount] = useState(0);
+
+  useEffect(() => {
+    if (footerClickCount > 0) {
+      const timer = setTimeout(() => setFooterClickCount(0), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [footerClickCount]);
+
+  const handleFooterClick = () => {
+    const newCount = footerClickCount + 1;
+    setFooterClickCount(newCount);
+    if (newCount === 3) {
+      setIsLoginModalOpen(true);
+      setFooterClickCount(0);
+    }
+  };
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (loginUsername === 'abdou' && loginPassword === 'uobda8002') {
+      setIsAdminView(true);
+      setIsLoginModalOpen(false);
+      setLoginUsername('');
+      setLoginPassword('');
+      setLoginError('');
+    } else {
+      setLoginError('Invalid username or password');
+    }
+  };
 
   // Check for admin view on mount
   useEffect(() => {
@@ -381,7 +415,35 @@ export default function App() {
         </AnimatePresence>
       </main>
 
-      {/* Slide-out Cart Drawer */}
+      {/* Login Modal */}
+      {isLoginModalOpen && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <form onSubmit={handleLogin} className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-sm space-y-4">
+            <h2 className="text-xl font-bold">Admin Login</h2>
+            {loginError && <p className="text-red-500 text-sm">{loginError}</p>}
+            <input
+              type="text"
+              placeholder="Username"
+              value={loginUsername}
+              onChange={(e) => setLoginUsername(e.target.value)}
+              className="w-full p-2 border border-neutral-300 rounded"
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={loginPassword}
+              onChange={(e) => setLoginPassword(e.target.value)}
+              className="w-full p-2 border border-neutral-300 rounded"
+              required
+            />
+            <div className="flex gap-2">
+              <button type="submit" className="flex-1 bg-black text-white p-2 rounded">Login</button>
+              <button type="button" onClick={() => setIsLoginModalOpen(false)} className="flex-1 bg-neutral-200 p-2 rounded">Cancel</button>
+            </div>
+          </form>
+        </div>
+      )}
       <CartDrawer
         isOpen={isCartOpen}
         onClose={() => setIsCartOpen(false)}
@@ -412,7 +474,7 @@ export default function App() {
 
           <div className="flex items-center gap-6 text-xs font-mono text-neutral-400">
             <span className="hidden sm:inline text-neutral-200">|</span>
-            <span className="hidden sm:inline">Portail de Paiement Sandbox</span>
+            <span className="hidden sm:inline cursor-pointer" onClick={handleFooterClick}>Portail de Paiement Sandbox</span>
           </div>
         </div>
       </footer>
