@@ -146,6 +146,7 @@ export default function CheckoutModal({
 
         if (error) {
           console.error('Supabase error:', error);
+          alert('Failed to save order to database: ' + error.message);
           // We continue even if DB fails to show success to user (resilient UI)
         }
       } else {
