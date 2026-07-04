@@ -213,7 +213,9 @@ export default function AdminDashboard() {
                     >
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-xs font-mono font-bold text-neutral-900">#{String(order.id || '').slice(0, 8)}</div>
-                        <div className="text-[10px] text-neutral-400">{new Date(order.created_at).toLocaleDateString()}</div>
+                        <div className="text-[10px] text-neutral-400">
+                          {new Date(order.created_at).toLocaleDateString()} à {new Date(order.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                        </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm font-bold text-neutral-900">{order.first_name} {order.last_name}</div>
