@@ -14,8 +14,24 @@ import AdminDashboard from './components/AdminDashboard';
 import { Product, CartItem, SortKey, Color } from './types';
 import { PRODUCTS, CATEGORIES, SORT_OPTIONS } from './data';
 import { motion, AnimatePresence } from 'motion/react';
+import MotionIntro from './components/MotionIntro';
 
 export default function App() {
+  // Intro State
+  const [showIntro, setShowIntro] = useState(true);
+
+  // Prevent background scroll while intro is visible
+  useEffect(() => {
+    if (showIntro) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [showIntro]);
+
   // Navigation & Search State
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
@@ -181,6 +197,13 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-white text-black font-sans flex flex-col antialiased selection:bg-black selection:text-white" id="app-root">
+      {/* Motion Intro Splash Screen */}
+      <AnimatePresence>
+        {showIntro && (
+          <MotionIntro onComplete={() => setShowIntro(false)} />
+        )}
+      </AnimatePresence>
+
       {/* Dynamic Header Component */}
       <Header
         categories={CATEGORIES}
