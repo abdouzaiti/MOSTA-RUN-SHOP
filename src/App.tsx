@@ -494,7 +494,7 @@ export default function App() {
 
           <div className="flex items-center gap-6 text-xs font-mono text-neutral-400">
             <span className="hidden sm:inline text-neutral-200">|</span>
-            <span className="hidden sm:inline cursor-pointer" onClick={handleFooterClick}>Portail de Paiement Sandbox</span>
+            <span className="cursor-pointer hover:text-neutral-600 transition-colors py-1 px-2 -my-1 -mx-2 active:bg-neutral-100 rounded" onClick={handleFooterClick}>Portail de Paiement Sandbox</span>
           </div>
         </div>
       </footer>
