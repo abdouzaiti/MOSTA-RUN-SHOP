@@ -15,6 +15,7 @@ import { Product, CartItem, SortKey, Color } from './types';
 import { PRODUCTS, CATEGORIES, SORT_OPTIONS } from './data';
 import { motion, AnimatePresence } from 'motion/react';
 import MotionIntro from './components/MotionIntro';
+import WaveBackground from './components/WaveBackground';
 
 export default function App() {
   // Intro State
@@ -196,7 +197,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-white text-black font-sans flex flex-col antialiased selection:bg-black selection:text-white" id="app-root">
+    <div className="min-h-screen bg-[#FDFDFD] text-black font-sans flex flex-col antialiased selection:bg-black selection:text-white" id="app-root">
       {/* Motion Intro Splash Screen */}
       <AnimatePresence>
         {showIntro && (
@@ -223,7 +224,8 @@ export default function App() {
       />
 
       {/* Main Page Layout Wrapper */}
-      <main className="flex-1 pb-16">
+      <main className="flex-1 pb-16 relative">
+        <WaveBackground />
         <AnimatePresence mode="wait">
           {selectedProduct ? (
             // DETAILED PRODUCT SCREEN
