@@ -56,14 +56,7 @@ export default function FeaturedGrid({ products, onSelectProduct }: FeaturedGrid
               <p className="text-sm text-neutral-200 font-medium leading-relaxed max-w-sm">
                 Des vêtements pensés pour la performance, le confort et le style. Rejoins le club.
               </p>
-              <div className="pt-2">
-                <button
-                  className="inline-flex h-11 items-center justify-center rounded-full bg-[#0D5DF1] hover:bg-blue-600 px-6 text-xs font-semibold text-white transition-colors shadow-lg shadow-blue-500/20"
-                  id="discover-collection-btn"
-                >
-                  Découvrir la collection
-                </button>
-              </div>
+
             </div>
           </div>
 
