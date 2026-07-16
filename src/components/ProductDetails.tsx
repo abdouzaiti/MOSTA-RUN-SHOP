@@ -499,8 +499,7 @@ export default function ProductDetails({ product, onAddToCart, onBack, onSelectP
             {/* Header / Top controls */}
             <div className="w-full flex justify-between items-center max-w-7xl">
               <div className="flex flex-col text-left leading-[0.8] font-sans font-black tracking-tight text-[#0D5DF1] italic uppercase scale-y-[1.15] origin-left select-none">
-                <span className="text-[12px]">MRC</span>
-                <span className="text-[12px]">SHOP</span>
+                <img src="/logo.png" alt="Mosta Logo" className="h-6 w-auto" />
               </div>
               <div className="text-xs font-mono font-bold text-neutral-500 bg-neutral-100 px-3 py-1 rounded-full">
                 {selectedImageIndex + 1} / {product.images.length}
