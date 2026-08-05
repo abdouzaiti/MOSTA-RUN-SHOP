@@ -7,6 +7,7 @@ import React from 'react';
 import { Product } from '../types';
 import { motion } from 'motion/react';
 import LogoOverlay from './LogoOverlay';
+import { Truck } from 'lucide-react';
 
 interface FeaturedGridProps {
   products: Product[];
@@ -57,18 +58,21 @@ export default function FeaturedGrid({ products, onSelectProduct }: FeaturedGrid
                 Des vêtements pensés pour la performance, le confort et le style. Rejoins le club.
               </p>
 
+              <div className="pt-2">
+                <div className="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#0D5DF1]/30 via-blue-600/20 to-blue-400/20 backdrop-blur-md border border-blue-400/50 text-white text-xs font-bold shadow-xl shadow-blue-500/10">
+                  <span className="flex h-2 w-2 relative">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-400"></span>
+                  </span>
+                  <Truck className="w-4 h-4 text-blue-400 shrink-0" />
+                  <span className="tracking-wide">Livraison gratuite sur Mostaganem ville</span>
+                </div>
+              </div>
+
             </div>
           </div>
 
-          {/* Floating White-and-Black Price Tag Pill at bottom left */}
-          <div className="absolute bottom-6 left-6 md:left-12 z-20 flex items-center rounded-full border border-neutral-200/50 bg-white p-1 text-xs font-semibold text-black shadow-lg backdrop-blur-sm">
-            <span className="px-3.5 py-1 font-sans text-xs tracking-tight text-neutral-800 font-bold">
-              T-Shirt Performance
-            </span>
-            <span className="rounded-full bg-black px-3.5 py-1.5 text-[11px] font-bold text-white font-mono">
-              {largeItem.price.toFixed(0)} DA
-            </span>
-          </div>
+
         </motion.div>
 
         {/* Top Right Item (Casquette) */}
