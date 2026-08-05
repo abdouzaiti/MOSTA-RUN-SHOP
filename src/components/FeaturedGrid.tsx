@@ -46,8 +46,8 @@ export default function FeaturedGrid({ products, onSelectProduct }: FeaturedGrid
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent md:from-black/75 md:via-black/30 md:to-transparent" />
 
           {/* Banner Overlaid Content */}
-          <div className="absolute inset-y-0 left-0 flex flex-col justify-between p-8 md:p-12 z-10 max-w-lg">
-            <div className="space-y-3 mt-auto md:mt-0">
+          <div className="absolute inset-y-0 left-0 flex flex-col justify-start p-8 md:p-12 z-10 max-w-lg">
+            <div className="space-y-3">
               <span className="inline-block text-xs font-bold tracking-widest text-[#0D5DF1] bg-blue-50/90 px-3 py-1 rounded-md font-sans uppercase">
                 MRC SHOP
               </span>
@@ -57,18 +57,18 @@ export default function FeaturedGrid({ products, onSelectProduct }: FeaturedGrid
               <p className="text-sm text-neutral-200 font-medium leading-relaxed max-w-sm">
                 Des vêtements pensés pour la performance, le confort et le style. Rejoins le club.
               </p>
+            </div>
+          </div>
 
-              <div className="pt-2">
-                <div className="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#0D5DF1]/30 via-blue-600/20 to-blue-400/20 backdrop-blur-md border border-blue-400/50 text-white text-xs font-bold shadow-xl shadow-blue-500/10">
-                  <span className="flex h-2 w-2 relative">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-400"></span>
-                  </span>
-                  <Truck className="w-4 h-4 text-blue-400 shrink-0" />
-                  <span className="tracking-wide">Livraison gratuite sur Mostaganem ville</span>
-                </div>
-              </div>
-
+          {/* Bottom Free Delivery Badge */}
+          <div className="absolute bottom-6 left-6 md:bottom-8 md:left-12 z-20">
+            <div className="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#0D5DF1]/40 via-blue-600/30 to-blue-500/30 backdrop-blur-md border border-blue-400/50 text-white text-xs font-bold shadow-xl shadow-blue-500/20">
+              <span className="flex h-2 w-2 relative">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-400"></span>
+              </span>
+              <Truck className="w-4 h-4 text-blue-400 shrink-0" />
+              <span className="tracking-wide">Livraison gratuite sur Mostaganem ville</span>
             </div>
           </div>
 
